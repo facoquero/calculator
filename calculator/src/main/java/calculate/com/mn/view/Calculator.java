@@ -232,15 +232,6 @@ public class Calculator {
         }
     }
 
-    protected JPanel createPanelWithTitle(String title, JComponent... components) {
-        JPanel panel = new JPanel();
-        for (JComponent component : components) {
-            panel.add(component);
-        }
-        panel.setBorder(BorderFactory.createTitledBorder(title));
-        return panel;
-    }
-
     public void createAndShowGui() {
         SwingUtilities.invokeLater(() -> {
             setLookAndFeel();

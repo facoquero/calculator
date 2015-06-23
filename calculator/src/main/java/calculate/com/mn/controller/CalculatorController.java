@@ -23,4 +23,11 @@ public class CalculatorController {
         enteredDigit = 0;
     }
 
+    public double sum(double digitOne, double digitTwo) {
+        return digitOne + digitTwo;
+    }
+
+    public double subtract(double digitOne, double digitTwo) {
+        return digitOne - digitTwo;
+    }
 }
