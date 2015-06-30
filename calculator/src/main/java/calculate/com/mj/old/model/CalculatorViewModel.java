@@ -1,7 +1,7 @@
-package calculate.com.mj.model;
+package calculate.com.mj.old.model;
 
-import calculate.com.mj.constants.CALC_OPER;
-import calculate.com.mj.utils.KeyMapperUtil;
+import calculate.com.mj.old.constants.CALC_OPER;
+import calculate.com.mj.old.utils.KeyMapperUtil;
 
 import java.util.Observable;
 

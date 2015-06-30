@@ -1,0 +1,7 @@
+MVP approach:
+1) CalcIndicator
+    - solve passing reference from hiding implementation to showing in panel in View.
+        HowTo afford a protection ?? (getComponentForSwing() method)
+2) CalculatorProvider
+    - split old methods from model and use Caclc
+

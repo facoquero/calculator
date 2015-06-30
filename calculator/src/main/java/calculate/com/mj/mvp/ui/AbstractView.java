@@ -1,10 +1,10 @@
-package calculate.com.mj;
+package calculate.com.mj.mvp.ui;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public abstract class AbstractExample {
+public abstract class AbstractView {
 
     private static final String LAF_CLASS = "javax.swing.plaf.metal.MetalLookAndFeel";
 
@@ -12,7 +12,6 @@ public abstract class AbstractExample {
     private void showFrame(String title, JComponent content) {
         JFrame frame = new JFrame(title);
         frame.getContentPane().add(content);
-        frame.setJMenuBar(createMenuBar());
 
         frame.addWindowListener(new WindowAdapter() {
 
@@ -58,45 +57,17 @@ public abstract class AbstractExample {
 
     public abstract JComponent createContent();
 
-    protected JMenuBar createMenuBar() {
-        JMenuBar mainBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        mainBar.add(fileMenu);
-
-        JMenuItem open = new JMenuItem("Open ...");
-        JMenuItem exit = new JMenuItem("Exit");
-
-        fileMenu.add(open);
-        fileMenu.add(new JSeparator());
-        fileMenu.add(exit);
-
-        JMenu help = new JMenu("Help");
-        mainBar.add(help);
-
-        JMenuItem about = new JMenuItem("About");
-        help.add(about);
-
-        return mainBar;
-    }
-
-
     public void createAndShowGui() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                setLookAndFeel();
-                showFrame(getName(), createContent());
-            }
+        SwingUtilities.invokeLater(() -> {
+            setLookAndFeel();
+            showFrame(getName(), createContent());
         });
     }
 
     public void showGui(final JComponent createdContent) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                setLookAndFeel();
-                showFrame(getName(), createdContent);
-            }
+        SwingUtilities.invokeLater(() -> {
+            setLookAndFeel();
+            showFrame(getName(), createdContent);
         });
     }
 

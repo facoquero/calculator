@@ -1,10 +1,12 @@
-package calculate.com.mj.controller;
+package calculate.com.mj.old.controller;
 
-import calculate.com.mj.constants.CALC_FUNC;
-import calculate.com.mj.constants.CALC_OPER;
-import calculate.com.mj.model.CalculatorViewModel;
-import calculate.com.mj.utils.KeyMapperUtil;
-import calculate.com.mj.view.CalculatorView;
+
+
+import calculate.com.mj.old.constants.CALC_FUNC;
+import calculate.com.mj.old.constants.CALC_OPER;
+import calculate.com.mj.old.model.CalculatorViewModel;
+import calculate.com.mj.old.utils.KeyMapperUtil;
+import calculate.com.mj.old.view.CalculatorView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,6 +24,7 @@ public class CalculatorViewController {
     private CalculatorViewModel model;
 
     public CalculatorViewController() {
+
         model = createModel();
         view = createView();
         model.addObserver(view);
@@ -70,6 +73,15 @@ public class CalculatorViewController {
                         "Provided operation is not handled in Controller!");
             }
             System.out.println(operation);
+            switch(operation)
+            {
+                case ADD:
+                case DIV:
+                case MULT:
+                case SUB:
+                    model.provideOperation(getLabelFromKey(event));
+                    view.getIndicator().setText(model.getFirstArgument().toString());
+            }
         }
 
         private String getLabelFromKey(ActionEvent event) {
@@ -84,7 +96,7 @@ public class CalculatorViewController {
             String keyLabel = getLabelFromKey(event);
 
             model.provideDigitForArgument(keyLabel);
-            //view.getIndicator().setText(model.getFirstArgument().toString());
+            view.getIndicator().setText(model.getFirstArgument().toString());
 //            displayField += keyLabel;
 //
 //            view.getIndicator().setText(displayField);
@@ -109,6 +121,15 @@ public class CalculatorViewController {
                         "Provided function is not handled in Controller!");
             }
             System.out.println(function);
+            switch (function){
+                case EQ:
+                    model.execute();
+                    break;
+                case CLEAR:
+                    model.clear();
+                    view.getIndicator().setText("");
+            }
+
         }
 
         private String getLabelFromKey(ActionEvent event) {

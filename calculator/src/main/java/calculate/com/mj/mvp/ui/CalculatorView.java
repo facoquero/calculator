@@ -1,27 +1,28 @@
-package calculate.com.mj.view;
+package calculate.com.mj.mvp.ui;
 
-
-import calculate.com.mj.AbstractExample;
+import calculate.com.mj.mvp.CalculatorDisplay;
+import calculate.com.mj.mvp.HasCalcIndicator;
+import calculate.com.mj.mvp.ui.indicators.CalcIndicator;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Observable;
-import java.util.Observer;
 
-public class CalculatorView extends AbstractExample implements Observer {
-
-    private JTextField indicator;
+/**
+ * Created by mj on 2015-06-30.
+ */
+public class CalculatorView extends AbstractView implements CalculatorDisplay {
+    private CalcIndicator indicator;
     private Collection<JButton> numberAndColonKeys;
     private Collection<JButton> operationKeys;
     private Collection<JButton> functionKeys;
 
     public CalculatorView() {
         super();
-        this.numberAndColonKeys = new HashSet<JButton>();
-        this.operationKeys = new HashSet<JButton>();
-        this.functionKeys = new HashSet<JButton>();
+        this.numberAndColonKeys = new HashSet<>();
+        this.operationKeys = new HashSet<>();
+        this.functionKeys = new HashSet<>();
     }
 
     public static void main(String[] args) {
@@ -30,10 +31,6 @@ public class CalculatorView extends AbstractExample implements Observer {
 
     public Collection<JButton> getFunctionKeys() {
         return functionKeys;
-    }
-
-    public JTextField getIndicator() {
-        return indicator;
     }
 
     public Collection<JButton> getNumbersAndColonKeys() {
@@ -218,15 +215,13 @@ public class CalculatorView extends AbstractExample implements Observer {
 
     private JComponent createDisplayPanel() {
         JPanel displayPanel = new JPanel(new BorderLayout());
-        indicator = new JTextField();
-        indicator.setEditable(false);
-        displayPanel.add(indicator);
+        indicator = new CalcIndicator();
+        displayPanel.add(indicator.getComponentForSwing());
         return displayPanel;
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        indicator.setText((String) arg);
-        indicator.repaint();
+    public HasCalcIndicator getHasCalcIndicator() {
+        return indicator;
     }
 }

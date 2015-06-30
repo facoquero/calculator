@@ -1,16 +1,16 @@
-package calculate.com.mj.utils;
+package calculate.com.mj.old.utils;
 
 
-import calculate.com.mj.constants.CALC_FUNC;
-import calculate.com.mj.constants.CALC_OPER;
-import calculate.com.mj.constants.Constant;
+import calculate.com.mj.old.constants.CALC_FUNC;
+import calculate.com.mj.old.constants.CALC_OPER;
+import calculate.com.mj.old.constants.Constant;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class KeyMapperUtil {
-    final static Map<String, Constant> OPPERATIONS_BY_KEY_BINDINGS = new HashMap<String, Constant>();
-    final static Map<String, Constant> FUNCTIONS_BY_KEY_BINDINGS = new HashMap<String, Constant>();
+    final static Map<String, Constant> OPPERATIONS_BY_KEY_BINDINGS = new HashMap<>();
+    final static Map<String, Constant> FUNCTIONS_BY_KEY_BINDINGS = new HashMap<>();
 
     static {
         OPPERATIONS_BY_KEY_BINDINGS.put("*", CALC_OPER.MULT);
