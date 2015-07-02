@@ -1,4 +1,4 @@
-package calculate.com.mn.view;
+package calculate.com.mn.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

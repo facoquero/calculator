@@ -1,4 +1,4 @@
-package calculate.com.mn.view;
+package calculate.com.mn.ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,8 +6,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
 
-public class Calculator implements CalculatorDisplay {
+public class CalculatorView extends Observable implements CalculatorDisplay {
 
     private static final String LAF_CLASS = "javax.swing.plaf.metal.MetalLookAndFeel";
     private JTextField displayTextField;
@@ -187,7 +188,7 @@ public class Calculator implements CalculatorDisplay {
     }
 
     public static void main(String[] args) {
-        new Calculator().createAndShowGui();
+        new CalculatorView().createAndShowGui();
 
     }
 
@@ -237,9 +238,13 @@ public class Calculator implements CalculatorDisplay {
     }
 
     @Override
-    public double getEnteredNumber() {
+    public String getPressedNummericKeyText() {
         String enteredNumberString = displayTextField.getText();
-        double enteredNumber = Double.valueOf(enteredNumberString);
-        return enteredNumber;
+        return enteredNumberString;
+    }
+
+    @Override
+    public String getPressedOperationKeyText() {
+        return "+";
     }
 }

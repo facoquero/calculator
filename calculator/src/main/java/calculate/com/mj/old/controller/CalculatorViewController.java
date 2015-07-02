@@ -99,7 +99,7 @@ public class CalculatorViewController {
             view.getIndicator().setText(model.getFirstArgument().toString());
 //            displayField += keyLabel;
 //
-//            view.getIndicator().setText(displayField);
+//            ui.getIndicator().setText(displayField);
         }
 
         private String getLabelFromKey(ActionEvent event) {
