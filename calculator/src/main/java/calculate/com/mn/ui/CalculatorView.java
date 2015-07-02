@@ -1,17 +1,19 @@
 package calculate.com.mn.ui;
 
+import calculate.com.mn.presenter.CalculatorPresenter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Observable;
 
-public class CalculatorView extends Observable implements CalculatorDisplay {
+public class CalculatorView implements CalculatorDisplay {
 
     private static final String LAF_CLASS = "javax.swing.plaf.metal.MetalLookAndFeel";
     private JTextField displayTextField;
+    private CalculatorPresenter calculatorPresenter = new CalculatorPresenter(CalculatorPresenter.createDigitsStorage(), this);
 
     protected String getName() {
         return null;

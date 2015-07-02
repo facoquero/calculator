@@ -3,6 +3,7 @@ package calculate.com.mn.presenter;
 import calculate.com.mn.model.DigitsStorage;
 import calculate.com.mn.model.MathOperator;
 import calculate.com.mn.ui.CalculatorDisplay;
+import calculate.com.mn.ui.CalculatorView;
 
 /**
  * Created by Michał on 2015-07-02.
@@ -10,6 +11,19 @@ import calculate.com.mn.ui.CalculatorDisplay;
 public class CalculatorPresenter {
     CalculatorDisplay display;
     DigitsStorage digitsStorage;
+
+    public CalculatorPresenter(DigitsStorage digitsStorage, CalculatorDisplay display) {
+        this.digitsStorage = digitsStorage;
+        this.display = display;
+    }
+
+    public static CalculatorDisplay createCalculatorView() {
+        return new CalculatorView();
+    }
+
+    public static DigitsStorage createDigitsStorage() {
+        return new DigitsStorage();
+    }
 
     public void storePressedDigitToStorage() {
         String enteredNumber = display.getPressedNummericKeyText();
@@ -34,5 +48,11 @@ public class CalculatorPresenter {
             default:
                 System.out.println("Unsupported operation");
         }
+    }
+
+    public void calculate() {
+        digitsStorage.getFirstArgument();
+        digitsStorage.getSecondArgument();
+        digitsStorage.getMathOperator();
     }
 }

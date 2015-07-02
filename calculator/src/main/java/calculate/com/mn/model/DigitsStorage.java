@@ -20,4 +20,16 @@ public class DigitsStorage {
     public void storeMathOperator(MathOperator mathOperator) {
         this.mathOperator = mathOperator;
     }
+
+    public double getFirstArgument() {
+        return firstArgument;
+    }
+
+    public double getSecondArgument() {
+        return secondArgument;
+    }
+
+    public MathOperator getMathOperator() {
+        return mathOperator;
+    }
 }
