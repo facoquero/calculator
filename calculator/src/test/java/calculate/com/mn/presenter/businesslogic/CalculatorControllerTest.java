@@ -1,4 +1,4 @@
-package calculate.com.mn.controller;
+package calculate.com.mn.presenter.businesslogic;
 
 import org.junit.Test;
 

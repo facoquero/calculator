@@ -1,6 +1,6 @@
 package calculate.com.mn.view;
 
-import calculate.com.mn.controller.CalculatorController;
+import calculate.com.mn.presenter.businesslogic.CalculatorController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
