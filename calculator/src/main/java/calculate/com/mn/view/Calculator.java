@@ -1,7 +1,5 @@
 package calculate.com.mn.view;
 
-import calculate.com.mn.presenter.businesslogic.CalculatorController;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -9,17 +7,16 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Calculator {
+public class Calculator implements CalculatorDisplay {
 
     private static final String LAF_CLASS = "javax.swing.plaf.metal.MetalLookAndFeel";
-    CalculatorController calculatorController;
+    private JTextField displayTextField;
 
     protected String getName() {
         return null;
     }
 
     protected JComponent createContent() {
-        calculatorController = new CalculatorController();
         JPanel mainContentPanel = new JPanel();
         GridBagConstraints constraints = new GridBagConstraints();
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -33,7 +30,7 @@ public class Calculator {
     }
 
     private JComponent createDisplayPanel() {
-        JTextField displayTextField = new JTextField();
+        displayTextField = new JTextField();
         displayTextField.setEditable(false);
         return displayTextField;
     }
@@ -180,13 +177,13 @@ public class Calculator {
     private void registerListenersForDigitButtons(
             Collection<JButton> digitButtons) {
         for (JButton digitButton : digitButtons) {
-            digitButton.addActionListener(new NumericButtonsListener(calculatorController));
+            digitButton.addActionListener(new NumericButtonsListener());
         }
 
     }
 
     private void registerListenerForAllClearButton(JButton allClearButton) {
-        allClearButton.addActionListener(new AllClearButtonListener(calculatorController));
+        allClearButton.addActionListener(new AllClearButtonListener());
     }
 
     public static void main(String[] args) {
@@ -237,5 +234,12 @@ public class Calculator {
             setLookAndFeel();
             showFrame(getName(), createContent());
         });
+    }
+
+    @Override
+    public double getEnteredNumber() {
+        String enteredNumberString = displayTextField.getText();
+        double enteredNumber = Double.valueOf(enteredNumberString);
+        return enteredNumber;
     }
 }
