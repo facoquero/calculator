@@ -169,5 +169,10 @@ public class CalculatorView implements CalculatorDisplay
 
     }
 
+    public String getOperation()
+    {
+        return mainTextField.getText();
+    }
+
 
 }
