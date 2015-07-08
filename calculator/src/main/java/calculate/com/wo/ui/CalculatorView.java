@@ -1,15 +1,10 @@
 package calculate.com.wo.ui;
 
-import javax.swing.*;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import java.awt.*;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.swing.*;
 
 public class CalculatorView implements CalculatorDisplay
 {
@@ -41,6 +36,13 @@ public class CalculatorView implements CalculatorDisplay
         return mainPanel;
     }
 
+
+    public String getOperation()
+    {
+        return mainTextField.getText();
+    }
+
+
     private JComponent createOperationsPanel()
     {
         JPanel operationsPanel = new JPanel();
@@ -50,13 +52,14 @@ public class CalculatorView implements CalculatorDisplay
         return operationsPanel;
     }
 
+
     private JComponent createKeyboard()
     {
         JPanel keyboardPanel = new JPanel();
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout gbl = new GridBagLayout();
 
-        keyboardPanel.add(gbl);
+        // keyboardPanel.add(gbl);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
@@ -158,7 +161,7 @@ public class CalculatorView implements CalculatorDisplay
         gbc.gridx = 2;
         JButton equalsButton = new JButton("=");
         keyboardPanel.add(equalsButton, gbc);
-        theFunctions(equalsButton);
+        // theFunctions(equalsButton);
 
         gbc.gridx = 3;
         JButton plusButton = new JButton("+");
@@ -167,11 +170,6 @@ public class CalculatorView implements CalculatorDisplay
 
         return keyboardPanel;
 
-    }
-
-    public String getOperation()
-    {
-        return mainTextField.getText();
     }
 
 

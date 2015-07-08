@@ -1,13 +1,14 @@
 package calculate.com.mn.ui;
 
-import calculate.com.mn.presenter.CalculatorPresenter;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.swing.*;
+
+import calculate.com.mn.presenter.CalculatorPresenter;
 
 public class CalculatorView implements CalculatorDisplay {
 
@@ -15,9 +16,35 @@ public class CalculatorView implements CalculatorDisplay {
     private JTextField displayTextField;
     private CalculatorPresenter calculatorPresenter = new CalculatorPresenter(CalculatorPresenter.createDigitsStorage(), this);
 
+
+    public void createAndShowGui()
+    {
+        SwingUtilities.invokeLater( ( ) -> {
+            setLookAndFeel();
+            showFrame( getName(), createContent() );
+        } );
+    }
+
+
+    @Override
+    public String getPressedNummericKeyText()
+    {
+        String enteredNumberString = displayTextField.getText();
+        return enteredNumberString;
+    }
+
+
+    @Override
+    public String getPressedOperationKeyText()
+    {
+        return "+";
+    }
+
+
     protected String getName() {
         return null;
     }
+
 
     protected JComponent createContent() {
         JPanel mainContentPanel = new JPanel();
@@ -32,18 +59,33 @@ public class CalculatorView implements CalculatorDisplay {
         return mainContentPanel;
     }
 
+
+    protected JMenuBar createMenuBar()
+    {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu( "File" );
+        JMenuItem exitItem = new JMenuItem( "Exit" );
+        fileMenu.add( exitItem );
+        menuBar.add( fileMenu );
+        return menuBar;
+
+    }
+
+
     private JComponent createDisplayPanel() {
         displayTextField = new JTextField();
         displayTextField.setEditable(false);
         return displayTextField;
     }
 
+
     private JComponent createKeyboardPanel() {
         JPanel keyboardPanel = new JPanel();
         keyboardPanel.add(createNumericKeyboard());
-        keyboardPanel.add(createOperationKeyboard());
+        keyboardPanel.add( createOperationKeyboard() );
         return keyboardPanel;
     }
+
 
     private JComponent createOperationKeyboard() {
         JPanel operationKeyboard = new JPanel();
@@ -64,6 +106,7 @@ public class CalculatorView implements CalculatorDisplay {
         return operationKeyboard;
 
     }
+
 
     private JComponent createNumericKeyboard() {
         JPanel mainKeyboardPanel = new JPanel();
@@ -177,33 +220,24 @@ public class CalculatorView implements CalculatorDisplay {
 
     }
 
+
     private void registerListenersForDigitButtons(
             Collection<JButton> digitButtons) {
-        for (JButton digitButton : digitButtons) {
-            digitButton.addActionListener(new NumericButtonsListener());
+        for( JButton digitButton : digitButtons )
+        {
+            digitButton.addActionListener( new NumericButtonsListener(
+                calculatorPresenter ) );
         }
 
     }
 
-    private void registerListenerForAllClearButton(JButton allClearButton) {
-        allClearButton.addActionListener(new AllClearButtonListener());
+
+    private void registerListenerForAllClearButton( JButton allClearButton )
+    {
+        allClearButton.addActionListener( new AllClearButtonListener(
+            calculatorPresenter ) );
     }
 
-    public static void main(String[] args) {
-        new CalculatorView().createAndShowGui();
-
-    }
-
-    protected JMenuBar createMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem exitItem = new JMenuItem("Exit");
-        fileMenu.add(exitItem);
-        menuBar.add(fileMenu);
-        return menuBar;
-
-
-    }
 
     private void showFrame(String title, JComponent content) {
         JFrame frame = new JFrame(title);
@@ -213,16 +247,23 @@ public class CalculatorView implements CalculatorDisplay {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.addWindowListener(new WindowAdapter() {
+        frame.addWindowListener( new WindowAdapter()
+        {
             @Override
-            public void windowClosing(WindowEvent e) {
-                int result = JOptionPane.showConfirmDialog(null, "Do you want to Exit?", "Confirm", JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION) {
-                    System.exit(0);
+            public void windowClosing( WindowEvent e )
+            {
+                int result =
+                    JOptionPane.showConfirmDialog(
+                        null, "Do you want to Exit?", "Confirm",
+                        JOptionPane.YES_NO_OPTION );
+                if( result == JOptionPane.YES_OPTION )
+                {
+                    System.exit( 0 );
                 }
             }
-        });
+        } );
     }
+
 
     private void setLookAndFeel() {
         try {
@@ -232,21 +273,10 @@ public class CalculatorView implements CalculatorDisplay {
         }
     }
 
-    public void createAndShowGui() {
-        SwingUtilities.invokeLater(() -> {
-            setLookAndFeel();
-            showFrame(getName(), createContent());
-        });
-    }
 
-    @Override
-    public String getPressedNummericKeyText() {
-        String enteredNumberString = displayTextField.getText();
-        return enteredNumberString;
-    }
+    public static void main( String[] args )
+    {
+        new CalculatorView().createAndShowGui();
 
-    @Override
-    public String getPressedOperationKeyText() {
-        return "+";
     }
 }

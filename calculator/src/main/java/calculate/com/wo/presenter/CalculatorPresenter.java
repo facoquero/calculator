@@ -1,7 +1,7 @@
 package calculate.com.wo.presenter;
 
-import calculate.com.wo.ui.*;
-import calculate.com.wo.model.*;
+import calculate.com.mj.mvp.model.CalculatorModel;
+import calculate.com.wo.ui.CalculatorView;
 
 public class CalculatorPresenter implements Presenter
 {

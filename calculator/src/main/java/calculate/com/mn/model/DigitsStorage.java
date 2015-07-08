@@ -10,6 +10,7 @@ public class DigitsStorage {
     MathOperator mathOperator;
 
     public void storeNumber(double enteredNumber) {
+        System.out.println( "enteredNumber = " + enteredNumber );
         if (mathOperator != null) {
             firstArgument = enteredNumber;
         } else {
@@ -31,5 +32,13 @@ public class DigitsStorage {
 
     public MathOperator getMathOperator() {
         return mathOperator;
+    }
+
+
+    public void clear()
+    {
+        firstArgument = 0;
+        secondArgument = 0;
+        mathOperator = null;
     }
 }

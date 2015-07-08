@@ -17,18 +17,18 @@ public class CalculatorPresenter {
         this.display = display;
     }
 
-    public static CalculatorDisplay createCalculatorView() {
-        return new CalculatorView();
+
+    public void clear()
+    {
+        digitsStorage.clear();
     }
 
-    public static DigitsStorage createDigitsStorage() {
-        return new DigitsStorage();
+
+    public void storePressedDigitToStorage( int digit )
+    {
+        digitsStorage.storeNumber( digit );
     }
 
-    public void storePressedDigitToStorage() {
-        String enteredNumber = display.getPressedNummericKeyText();
-        digitsStorage.storeNumber(Integer.parseInt(enteredNumber));
-    }
 
     public void storeOperationToStorage() {
         final String operationSymbol = display.getPressedOperationKeyText();
@@ -50,9 +50,23 @@ public class CalculatorPresenter {
         }
     }
 
-    public void calculate() {
+
+    public void calculate()
+    {
         digitsStorage.getFirstArgument();
         digitsStorage.getSecondArgument();
         digitsStorage.getMathOperator();
+    }
+
+
+    public static CalculatorDisplay createCalculatorView()
+    {
+        return new CalculatorView();
+    }
+
+
+    public static DigitsStorage createDigitsStorage()
+    {
+        return new DigitsStorage();
     }
 }
