@@ -1,18 +1,44 @@
 package calculate.com.wo.ui;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.*;
 
-public class CalculatorView implements CalculatorDisplay
+public class CalculatorView extends JFrame implements CalculatorDisplay
 {
 
     JTextField mainTextField;
     Collection<JComponent> theNumbers = new ArrayList<JComponent>();
     Collection<JComponent> theOperators = new ArrayList<JComponent>();
     Collection<JComponent> theFunctions = new ArrayList<JComponent>();
+
+
+
+    JButton percentButton = new JButton("%");
+    JButton plusMinusButton = new JButton("+/-");
+    JButton cButton = new JButton("C");
+    JButton acButton = new JButton("AC");
+    JButton sevenButton = new JButton("7");
+    JButton eightButton = new JButton("8");
+    JButton nineButton = new JButton("9");
+    JButton divButton = new JButton("/");
+    JButton fourButton = new JButton("4");
+    JButton fiveButton = new JButton("5");
+    JButton sixButton = new JButton("6");
+    JButton multButton = new JButton("*");
+    JButton oneButton = new JButton("1");
+    JButton twoButton = new JButton("2");
+    JButton threeButton = new JButton("3");
+    JButton minusButton = new JButton("-");
+    JButton zeroButton = new JButton("0");
+    JButton dotButton = new JButton(".");
+    JButton equalsButton = new JButton("=");
+    JButton plusButton = new JButton("+");
+
+
 
     public CalculatorView()
     {
@@ -22,6 +48,11 @@ public class CalculatorView implements CalculatorDisplay
     public JComponent createContent()
     {
         JPanel mainPanel = new JPanel();
+
+        this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        this.setSize( 250, 250 );
+        this.setContentPane(mainPanel);
+
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout gbl = new GridBagLayout();
         mainPanel.setLayout(gbl);
@@ -46,7 +77,7 @@ public class CalculatorView implements CalculatorDisplay
     private JComponent createOperationsPanel()
     {
         JPanel operationsPanel = new JPanel();
-        mainTextField = new JTextField();
+        mainTextField = new JTextField("", 15 );
         mainTextField.setEditable(false);
         operationsPanel.add(mainTextField);
         return operationsPanel;
@@ -59,117 +90,183 @@ public class CalculatorView implements CalculatorDisplay
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout gbl = new GridBagLayout();
 
-        // keyboardPanel.add(gbl);
+        keyboardPanel.setLayout( gbl );
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JButton percentButton = new JButton("%");
         keyboardPanel.add(percentButton, gbc);
         theOperators.add(percentButton);
 
+
+
         gbc.gridx = 1;
-        JButton plusMinusButton = new JButton("+/-");
         keyboardPanel.add(plusMinusButton, gbc);
         theFunctions.add(plusMinusButton);
 
         gbc.gridx = 2;
-        JButton cButton = new JButton("C");
         keyboardPanel.add(cButton, gbc);
         theFunctions.add(cButton);
 
         gbc.gridx = 3;
-        JButton acButton = new JButton("AC");
         keyboardPanel.add(acButton, gbc);
         theFunctions.add(acButton);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JButton sevenButton = new JButton("7");
         keyboardPanel.add(sevenButton, gbc);
         theNumbers.add(sevenButton);
 
         gbc.gridx = 1;
-        JButton eightButton = new JButton("8");
         keyboardPanel.add(eightButton, gbc);
         theNumbers.add(eightButton);
 
         gbc.gridx = 2;
-        JButton nineButton = new JButton("9");
         keyboardPanel.add(nineButton, gbc);
         theNumbers.add(nineButton);
 
         gbc.gridx = 3;
-        JButton divButton = new JButton("/");
+
         keyboardPanel.add(divButton, gbc);
         theOperators.add(divButton);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        JButton fourButton = new JButton("4");
         keyboardPanel.add(fourButton, gbc);
         theNumbers.add(fourButton);
 
         gbc.gridx = 1;
-        JButton fiveButton = new JButton("5");
         keyboardPanel.add(fiveButton, gbc);
         theNumbers.add(fiveButton);
 
         gbc.gridx = 2;
-        JButton sixButton = new JButton("6");
         keyboardPanel.add(sixButton, gbc);
         theNumbers.add(sixButton);
 
         gbc.gridx = 3;
-        JButton multButton = new JButton("*");
         keyboardPanel.add(multButton, gbc);
         theOperators.add(multButton);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
-        JButton oneButton = new JButton("1");
         keyboardPanel.add(oneButton, gbc);
         theNumbers.add(oneButton);
 
         gbc.gridx = 1;
-        JButton twoButton = new JButton("2");
         keyboardPanel.add(twoButton, gbc);
         theNumbers.add(twoButton);
 
         gbc.gridx = 2;
-        JButton threeButton = new JButton("3");
         keyboardPanel.add(threeButton, gbc);
         theNumbers.add(threeButton);
 
         gbc.gridx = 3;
-        JButton minusButton = new JButton("-");
         keyboardPanel.add(minusButton, gbc);
         theOperators.add(minusButton);
 
         gbc.gridx = 0;
         gbc.gridy = 4;
-        JButton zeroButton = new JButton("0");
         keyboardPanel.add(zeroButton, gbc);
         theNumbers.add(zeroButton);
 
         gbc.gridx = 1;
-        JButton dotButton = new JButton(".");
         keyboardPanel.add(dotButton, gbc);
         theNumbers.add(dotButton);
 
         gbc.gridx = 2;
-        JButton equalsButton = new JButton("=");
         keyboardPanel.add(equalsButton, gbc);
-        // theFunctions(equalsButton);
+        theFunctions.add(equalsButton);
 
         gbc.gridx = 3;
-        JButton plusButton = new JButton("+");
         keyboardPanel.add(plusButton, gbc);
         theOperators.add(plusButton);
 
         return keyboardPanel;
 
+    }
+
+
+
+    public void addPercentListener(ActionListener percentListener)
+    {
+        percentButton.addActionListener( percentListener );
+    }
+    public void addPlusMinusListener(ActionListener plusMinusListener)
+    {
+        plusMinusButton.addActionListener( plusMinusListener );
+    }
+    public void addCListener(ActionListener cListener)
+    {
+        cButton.addActionListener( cListener );
+    }
+    public void addACListener(ActionListener acListener)
+    {
+        acButton.addActionListener( acListener );
+    }
+    public void addSevenListener(ActionListener sevenListener)
+    {
+        sevenButton.addActionListener( sevenListener );
+    }
+    public void addEightListener(ActionListener eightListener)
+    {
+        eightButton.addActionListener( eightListener );
+    }
+    public void addNineListener(ActionListener nineListener)
+    {
+        nineButton.addActionListener( nineListener );
+    }
+    public void addDivListener(ActionListener divListener)
+    {
+        divButton.addActionListener( divListener );
+    }
+    public void addFourListener(ActionListener fourListener)
+    {
+        fourButton.addActionListener( fourListener );
+    }
+    public void addFiveListener(ActionListener fiveListener)
+    {
+        fiveButton.addActionListener( fiveListener );
+    }
+    public void addSixListener(ActionListener sixListener)
+    {
+        sixButton.addActionListener( sixListener );
+    }
+    public void addMultListener(ActionListener multListener)
+    {
+        multButton.addActionListener( multListener );
+    }
+    public void addOneListener(ActionListener oneListener)
+    {
+        oneButton.addActionListener( oneListener );
+    }
+    public void addTwoListener(ActionListener twoListener)
+    {
+        twoButton.addActionListener( twoListener );
+    }
+    public void addThreeListener(ActionListener threeListener)
+    {
+        threeButton.addActionListener( threeListener );
+    }
+    public void addMinusListener(ActionListener minusListener)
+    {
+        minusButton.addActionListener( minusListener );
+    }
+    public void addZeroListener(ActionListener zeroListener)
+    {
+        zeroButton.addActionListener( zeroListener );
+    }
+    public void addDotListener(ActionListener dotListener)
+    {
+        dotButton.addActionListener( dotListener );
+    }
+    public void addEqualsListener(ActionListener equalsListener)
+    {
+        equalsButton.addActionListener( equalsListener );
+    }
+    public void addPlusListener(ActionListener plusListener)
+    {
+        plusButton.addActionListener( plusListener );
     }
 
 
